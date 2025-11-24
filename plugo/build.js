@@ -14,6 +14,9 @@ const OUTPUT_MIN_FILE = `${OUTPUT_DIR}/plugo.min.css`;
  * Utils
  * ----------------------------------------------------------*/
 
+const LIGHT_FACTOR = 0.2;
+const DARK_FACTOR = -0.2;
+
 /**
  * Convert HEX (#rrggbb) -> { r,g,b }
  */
@@ -75,13 +78,11 @@ ${content}
 
 function generateColors(theme) {
     const { colors } = theme;
-    const lightFactor = 0.2; // +20%
-    const darkFactor = -0.2; // -20%
 
     let css = `/* === Colors & CSS variables === */\n:root {\n`;
     for (const [name, value] of Object.entries(colors)) {
-        const light = adjustColorLuminance(value, lightFactor);
-        const dark = adjustColorLuminance(value, darkFactor);
+        const light = adjustColorLuminance(value, LIGHT_FACTOR);
+        const dark = adjustColorLuminance(value, DARK_FACTOR);
         css += `  --color-${name}: ${value};\n`;
         css += `  --color-${name}-light: ${light};\n`;
         css += `  --color-${name}-dark: ${dark};\n`;
@@ -152,6 +153,7 @@ function generateLayout(theme) {
     let css = `/* === Layout & Grid === */
 :root {
   --container-max-width: ${layout.container};
+  --grid-columns: ${cols};
 }
 
 /* Container centré */
@@ -199,15 +201,10 @@ function generateLayout(theme) {
 }
 
 function generateSpacing(theme) {
-    const { spacing, breakpoints } = theme.layout
-        ? theme
-        : { layout: { breakpoints: {} } }; // sécurité
-
-    // En réalité spacing est dans theme.spacing, pas theme.layout.spacing
     const spacingTheme = theme.spacing;
     const baseUnit = spacingTheme.baseUnit;
+    const breakpoints = theme.layout ? theme.layout.breakpoints : {};
 
-    // Échelle simple : 0 → 0, 1 → 0.25, 2 → 0.5, 3 → 1, 4 → 1.5, 5 → 2
     const scale = {
         0: 0,
         1: 0.25,
@@ -242,20 +239,31 @@ function generateSpacing(theme) {
         ['pl', ['padding-left']],
         ['pr', ['padding-right']],
         ['px', ['padding-left', 'padding-right']],
-        ['py', ['padding-top', 'padding-bottom']]
+        ['py', ['padding-top', 'padding-bottom']],
+        ['gap', ['gap']]
     ];
-
-    for (const [key, factor] of Object.entries(scale)) {
-        for (const [short, cssProps] of props) {
-            css += `.${short}-${key} {\n`;
-            for (const prop of cssProps) {
-                css += `  ${prop}: var(--spacing-${key});\n`;
+    const buildSet = (prefix = '', indent = '') => {
+        let block = '';
+        for (const key of Object.keys(scale)) {
+            for (const [short, cssProps] of props) {
+                block += `${indent}.${prefix}${short}-${key} {\n`;
+                for (const prop of cssProps) {
+                    block += `${indent}  ${prop}: var(--spacing-${key});\n`;
+                }
+                block += `${indent}}\n`;
             }
-            css += `}\n`;
         }
+        return block;
+    };
+
+    css += buildSet();
+
+    for (const [bpName, minWidth] of Object.entries(breakpoints)) {
+        const responsive = buildSet(`${bpName}\\:`, '  ');
+        css += wrapWithBreakpoint(bpName, minWidth, responsive);
     }
 
-    return css;
+    return css + '\n';
 }
 
 /* ------------------------------------------------------------
@@ -365,10 +373,7 @@ function generateUtilityColor(theme) {
 }
 
 function generateUtilitySpacing(theme) {
-    // On réutilise generateSpacing pour les variables + classes,
-    // donc ici on ne fait rien de plus. Mais tu pourrais ajouter des utilitaires
-    // comme .gap-1, etc. si tu veux.
-    return '';
+    return generateSpacing(theme);
 }
 
 function generateUtilityImage() {
@@ -540,7 +545,6 @@ function generateCSS(config) {
     css += generateColors(theme);
     css += generateTypography(theme);
     css += generateLayout(theme);
-    css += generateSpacing(theme);
 
     // Components
     if (config.components.includes('button')) {
