@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "build": "node plugo/build.js"
+    "build": "node build.js"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.0",
