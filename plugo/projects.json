@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Dashboard analytics",
+    "summary": "Interface responsive avec graphiques SVG et filtres dynamiques.",
+    "description": "Création d'un tableau de bord temps réel en JavaScript natif, animations de cartes et gestion des états via events custom.",
+    "type": "application web",
+    "image": "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=800&q=80",
+    "year": "2025"
+  },
+  {
+    "title": "Landing SaaS",
+    "summary": "Page marketing avec hero animé, FAQ accordéon et formulaire.",
+    "description": "Intégration mobile first d'une landing page, optimisation des assets, mise en place d'un suivi des conversions.",
+    "type": "site vitrine",
+    "image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80",
+    "year": "2025"
+  },
+  {
+    "title": "Portfolio étudiant",
+    "summary": "SPA en JS natif avec router léger et animations au scroll.",
+    "description": "Refonte d'un portfolio pour valoriser des projets d'école, ajout d'un mode sombre et d'une gestion de contenu JSON.",
+    "type": "projet d'école",
+    "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80",
+    "year": "2024"
+  },
+  {
+    "title": "Espace membre",
+    "summary": "Parcours d'inscription et zone sécurisée avec dashboard.",
+    "description": "Prototype frontend pour une plateforme de formation : formulaires validés côté client, navigation douce et gestion d'état.",
+    "type": "application web",
+    "image": "https://images.unsplash.com/photo-1504805572947-34fad45aed93?auto=format&fit=crop&w=800&q=80",
+    "year": "2024"
+  }
+]
