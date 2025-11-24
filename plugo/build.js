@@ -574,9 +574,7 @@ function generateCSS(config) {
     return css;
 }
 
-/**
- * Très basique : compte les classes via regex `.nom {`
- */
+
 function countClasses(css) {
     const matches = css.match(/\.[a-zA-Z0-9\\:_-]+\s*\{/g) || [];
     return matches.length;
