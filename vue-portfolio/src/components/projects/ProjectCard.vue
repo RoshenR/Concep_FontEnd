@@ -10,15 +10,27 @@
       />
     </div>
 
-    <div class="flex items-center gap-2 text-xs">
-      <span
-          class="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-200 font-semibold"
+    <div class="flex items-center justify-between gap-2 text-xs">
+      <div class="flex items-center gap-2">
+        <span
+            class="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-200 font-semibold"
+        >
+          {{ project.type }}
+        </span>
+        <span class="text-slate-400" v-if="project.technologies?.length">
+          {{ project.technologies.join(' • ') }}
+        </span>
+      </div>
+
+      <!-- Bouton suppression admin -->
+      <button
+          v-if="canDelete"
+          type="button"
+          class="text-[11px] text-red-400 hover:text-red-300 underline-offset-2 hover:underline"
+          @click="$emit('delete', project.id)"
       >
-        {{ project.type }}
-      </span>
-      <span class="text-slate-400" v-if="project.technologies?.length">
-        {{ project.technologies.join(' • ') }}
-      </span>
+        Supprimer
+      </button>
     </div>
 
     <h3 class="text-xl font-bold">{{ project.title }}</h3>
@@ -40,5 +52,10 @@ import type { Project } from '../../types/Project'
 
 defineProps<{
   project: Project
+  canDelete?: boolean
+}>()
+
+defineEmits<{
+  (e: 'delete', id: string): void
 }>()
 </script>

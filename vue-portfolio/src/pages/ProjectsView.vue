@@ -3,7 +3,7 @@
     <header class="mb-6">
       <h1 class="text-3xl font-bold mb-2">Projets</h1>
       <p class="text-slate-400 text-sm">
-        Recherche par mot-clé, filtre par type et consultation des détails.
+        Recherche par mot-clé, filtre par type, ajout et suppression (protégée) de projets.
       </p>
     </header>
 
@@ -30,6 +30,8 @@
           v-for="project in filteredProjects"
           :key="project.id"
           :project="project"
+          :can-delete="true"
+          @delete="handleDelete"
       />
     </div>
 
@@ -55,6 +57,7 @@ const {
   error,
   loadProjects,
   addProject,
+  deleteProject,
 } = useProjectsStore()
 
 onMounted(() => {
@@ -63,5 +66,21 @@ onMounted(() => {
 
 function handleProjectAdded(partial: Omit<Project, 'id'>) {
   addProject(partial)
+}
+
+function handleDelete(id: string) {
+  const password = window.prompt('Mot de passe admin requis pour supprimer ce projet :')
+
+  if (password !== 'admin') {
+    if (password !== null) {
+      window.alert('Mot de passe incorrect.')
+    }
+    return
+  }
+
+  const confirmDelete = window.confirm('Confirmer la suppression de ce projet ?')
+  if (!confirmDelete) return
+
+  deleteProject(id)
 }
 </script>

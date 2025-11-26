@@ -8,10 +8,29 @@ const router = createRouter({
     routes: [
         { path: '/', name: 'home', component: HomeView },
         { path: '/projects', name: 'projects', component: ProjectsView },
-        { path: '/projects/:id', name: 'project-detail', component: ProjectDetailView, props: true },
+        {
+            path: '/projects/:id',
+            name: 'project-detail',
+            component: ProjectDetailView,
+            props: true,
+        },
     ],
-    scrollBehavior() {
-        return { top: 0 }
+    scrollBehavior(to, from, savedPosition) {
+        // Si on revient en arrière / avant → position sauvegardée
+        if (savedPosition) {
+            return savedPosition
+        }
+
+        // Si on a un hash (ex: #contact), on scroll dessus
+        if (to.hash) {
+            return {
+                el: to.hash,
+                behavior: 'smooth',
+            }
+        }
+
+        // Sinon, on remonte en haut
+        return { top: 0, behavior: 'smooth' }
     },
 })
 

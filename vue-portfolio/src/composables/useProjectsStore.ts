@@ -39,7 +39,7 @@ async function loadProjects() {
     error.value = null
 
     try {
-        // 1. Projets de base depuis projects.json
+        // 1. Projets de base (projects.json)
         const baseProjects = await fetchProjects()
 
         // 2. Projets ajoutés côté client (localStorage)
@@ -71,10 +71,20 @@ function addProject(partial: Omit<Project, 'id'>) {
     // Ajouter en mémoire
     projects.value.push(newProject)
 
-    // Mettre à jour le localStorage (uniquement les projets ajoutés par l’utilisateur)
+    // Maj du localStorage (uniquement les projets ajoutés par l’utilisateur)
     const extraProjects = loadExtraProjectsFromStorage()
     extraProjects.push(newProject)
     saveExtraProjectsToStorage(extraProjects)
+}
+
+function deleteProject(id: string) {
+    // Supprimer de la liste en mémoire
+    projects.value = projects.value.filter((p) => p.id !== id)
+
+    // Supprimer de ceux stockés dans le localStorage (si c’en est un)
+    const extraProjects = loadExtraProjectsFromStorage()
+    const updatedExtra = extraProjects.filter((p) => p.id !== id)
+    saveExtraProjectsToStorage(updatedExtra)
 }
 
 const filteredProjects = computed(() => {
@@ -105,5 +115,6 @@ export function useProjectsStore() {
         selectedType,
         loadProjects,
         addProject,
+        deleteProject,
     }
 }

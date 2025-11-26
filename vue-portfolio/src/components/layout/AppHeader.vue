@@ -25,12 +25,12 @@
         >
           Projets
         </RouterLink>
-        <a
-            href="#contact"
+        <RouterLink
+            :to="{ path: '/', hash: '#contact' }"
             class="hidden sm:inline text-slate-300 hover:text-cyan-300"
         >
           Contact
-        </a>
+        </RouterLink>
       </div>
     </nav>
   </header>
