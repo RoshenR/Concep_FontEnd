@@ -1,8 +1,8 @@
 <template>
-  <section class="max-w-5xl mx-auto px-4 py-12">
-    <header class="mb-6">
-      <h1 class="text-3xl font-bold mb-2">Projets</h1>
-      <p class="text-slate-400 text-sm">
+  <section class="max-w-5xl mx-auto px-4 py-10 md:py-14 space-y-8">
+    <header class="space-y-2">
+      <h1 class="text-3xl font-bold">Projets</h1>
+      <p class="text-slate-600 text-sm max-w-2xl dark:text-slate-400">
         Recherche par mot-clé, filtre par type, ajout et suppression (protégée) de projets.
       </p>
     </header>
@@ -15,17 +15,14 @@
         @update:type="selectedType = $event"
     />
 
-    <div v-if="loading" class="text-slate-400 text-sm">
+    <div v-if="loading" class="text-slate-500 text-sm dark:text-slate-400">
       Chargement des projets...
     </div>
-    <div v-else-if="error" class="text-red-400 text-sm">
+    <div v-else-if="error" class="text-red-500 text-sm">
       {{ error }}
     </div>
 
-    <div
-        v-else
-        class="grid md:grid-cols-2 gap-6"
-    >
+    <div v-else class="grid md:grid-cols-2 gap-6">
       <ProjectCard
           v-for="project in filteredProjects"
           :key="project.id"
@@ -35,7 +32,6 @@
       />
     </div>
 
-    <!-- Formulaire d'ajout de projet -->
     <AddProjectForm @project-added="handleProjectAdded" />
   </section>
 </template>

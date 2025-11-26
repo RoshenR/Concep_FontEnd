@@ -1,5 +1,5 @@
 <template>
-  <section class="mt-10 border-t border-slate-800 pt-8">
+  <section class="mt-10 border-t border-slate-200 pt-8 dark:border-slate-800">
     <h2 class="text-xl font-semibold mb-4">Ajouter un projet (démo)</h2>
 
     <form @submit.prevent="handleSubmit" class="grid md:grid-cols-2 gap-4">
@@ -8,8 +8,9 @@
         <label class="block text-sm">Titre</label>
         <input
             v-model="form.title"
-            class="w-full rounded-lg bg-slate-900 border px-3 py-2 text-sm
-                 border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            class="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2
+                 bg-white border-slate-300 text-slate-900 focus:ring-cyan-500
+                 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100"
             placeholder="Ex : GameLibrary API"
         />
       </div>
@@ -19,8 +20,9 @@
         <label class="block text-sm">Type</label>
         <select
             v-model="form.type"
-            class="w-full rounded-lg bg-slate-900 border px-3 py-2 text-sm
-                 border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            class="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2
+                 bg-white border-slate-300 text-slate-900 focus:ring-cyan-500
+                 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100"
         >
           <option value="">Choisir un type…</option>
           <option>Projet d’école</option>
@@ -38,8 +40,9 @@
         <label class="block text-sm">Technologies (séparées par des virgules)</label>
         <input
             v-model="technologiesText"
-            class="w-full rounded-lg bg-slate-900 border px-3 py-2 text-sm
-                 border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            class="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2
+                 bg-white border-slate-300 text-slate-900 focus:ring-cyan-500
+                 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100"
             placeholder="Ex : Vue.js, TypeScript, Tailwind CSS"
         />
       </div>
@@ -49,8 +52,9 @@
         <label class="block text-sm">Description courte</label>
         <input
             v-model="form.shortDescription"
-            class="w-full rounded-lg bg-slate-900 border px-3 py-2 text-sm
-                 border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            class="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2
+                 bg-white border-slate-300 text-slate-900 focus:ring-cyan-500
+                 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100"
             placeholder="Résumé rapide du projet (une phrase)"
         />
       </div>
@@ -61,31 +65,33 @@
         <textarea
             v-model="form.description"
             rows="4"
-            class="w-full rounded-lg bg-slate-900 border px-3 py-2 text-sm
-                 border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            class="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2
+                 bg-white border-slate-300 text-slate-900 focus:ring-cyan-500
+                 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100"
             placeholder="Détails du contexte, objectifs, stack, difficultés…"
         ></textarea>
       </div>
 
-      <!-- Image (URL optionnelle) -->
+      <!-- Image -->
       <div class="space-y-2 md:col-span-2">
         <label class="block text-sm">Image (URL, optionnelle)</label>
         <input
             v-model="form.image"
-            class="w-full rounded-lg bg-slate-900 border px-3 py-2 text-sm
-                 border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            class="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2
+                 bg-white border-slate-300 text-slate-900 focus:ring-cyan-500
+                 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100"
             placeholder="Ex : /images/mon-projet.jpg"
         />
       </div>
 
       <button
           type="submit"
-          class="mt-2 px-4 py-2 rounded-lg bg-emerald-500 text-slate-950 text-sm font-semibold hover:bg-emerald-400"
+          class="mt-2 px-4 py-2 rounded-lg bg-emerald-600 text-slate-50 text-sm font-semibold hover:bg-emerald-500"
       >
         Ajouter le projet
       </button>
 
-      <p v-if="error" class="md:col-span-2 text-xs text-red-400">
+      <p v-if="error" class="md:col-span-2 text-xs text-red-500">
         {{ error }}
       </p>
     </form>
@@ -115,25 +121,12 @@ const error = ref<string | null>(null)
 function handleSubmit() {
   error.value = null
 
-  if (!form.title.trim()) {
-    error.value = 'Le titre est obligatoire.'
-    return
-  }
-
-  if (!form.type.trim()) {
-    error.value = 'Le type est obligatoire.'
-    return
-  }
-
-  if (!form.shortDescription.trim()) {
-    error.value = 'La description courte est obligatoire.'
-    return
-  }
-
-  if (!form.description.trim()) {
-    error.value = 'La description complète est obligatoire.'
-    return
-  }
+  if (!form.title.trim()) return (error.value = 'Le titre est obligatoire.')
+  if (!form.type.trim()) return (error.value = 'Le type est obligatoire.')
+  if (!form.shortDescription.trim())
+    return (error.value = 'La description courte est obligatoire.')
+  if (!form.description.trim())
+    return (error.value = 'La description complète est obligatoire.')
 
   const technologies = technologiesText.value
       .split(',')
@@ -151,7 +144,6 @@ function handleSubmit() {
 
   emit('project-added', payload)
 
-  // reset du formulaire
   form.title = ''
   form.type = ''
   form.shortDescription = ''

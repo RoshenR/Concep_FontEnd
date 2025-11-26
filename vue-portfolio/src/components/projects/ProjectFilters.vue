@@ -5,13 +5,17 @@
         @input="onSearchInput"
         type="text"
         placeholder="Rechercher par mot-clé..."
-        class="w-full md:flex-1 rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
+        class="w-full md:flex-1 rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2
+             bg-white border-slate-300 text-slate-900 focus:ring-cyan-500
+             dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100"
     />
 
     <select
         :value="type"
         @change="onTypeChange"
-        class="w-full md:w-48 rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
+        class="w-full md:w-48 rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2
+             bg-white border-slate-300 text-slate-900 focus:ring-cyan-500
+             dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100"
     >
       <option value="all">Tous les types</option>
       <option

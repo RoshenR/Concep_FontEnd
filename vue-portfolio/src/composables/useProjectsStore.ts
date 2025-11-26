@@ -39,13 +39,13 @@ async function loadProjects() {
     error.value = null
 
     try {
-        // 1. Projets de base (projects.json)
+        // Projets de base
         const baseProjects = await fetchProjects()
 
-        // 2. Projets ajoutés côté client (localStorage)
+        // Projets ajoutés côté client
         const extraProjects = loadExtraProjectsFromStorage()
 
-        // 3. Fusion sans doublon sur l'id
+        // Fusion sans doublons
         const baseIds = new Set(baseProjects.map((p) => p.id))
         const merged = [...baseProjects]
 
@@ -68,20 +68,16 @@ function addProject(partial: Omit<Project, 'id'>) {
     const id = crypto.randomUUID()
     const newProject: Project = { ...partial, id }
 
-    // Ajouter en mémoire
     projects.value.push(newProject)
 
-    // Maj du localStorage (uniquement les projets ajoutés par l’utilisateur)
     const extraProjects = loadExtraProjectsFromStorage()
     extraProjects.push(newProject)
     saveExtraProjectsToStorage(extraProjects)
 }
 
 function deleteProject(id: string) {
-    // Supprimer de la liste en mémoire
     projects.value = projects.value.filter((p) => p.id !== id)
 
-    // Supprimer de ceux stockés dans le localStorage (si c’en est un)
     const extraProjects = loadExtraProjectsFromStorage()
     const updatedExtra = extraProjects.filter((p) => p.id !== id)
     saveExtraProjectsToStorage(updatedExtra)
