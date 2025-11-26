@@ -1,0 +1,75 @@
+[
+  {
+    "id": "game-library-api",
+    "title": "GameLibrary API",
+    "type": "Application web" ,
+    "shortDescription": "API REST complète pour gérer une bibliothèque de jeux vidéo.",
+    "description": "Développement d'une API REST modulaire permettant la gestion d'utilisateurs, de jeux, de bibliothèques personnelles et de configurations avancées. Authentification via JWT, base SQL avec Prisma et stockage MongoDB. Documentation via Swagger et tests Postman.",
+    "image": "/images/game-library.jpg",
+    "technologies": ["Node.js", "Express", "PostgreSQL", "MongoDB", "Prisma", "JWT"]
+  },
+  {
+    "id": "symfony-library-app",
+    "title": "CityLibrary Manager",
+    "type": "Projet d’école",
+    "shortDescription": "Application complète de gestion de bibliothèque avec interface d'administration.",
+    "description": "Application Symfony permettant la gestion d'un catalogue de livres, d'abonnés et d'emprunts. Architecture MVC propre, authentification, sécurisation des routes, formulaires dynamiques et interface d'administration responsive.",
+    "image": "/images/city-library.jpg",
+    "technologies": ["Symfony", "PHP", "MySQL", "Twig"]
+  },
+  {
+    "id": "native-php-rest-api",
+    "title": "LegacyREST API",
+    "type": "Backend",
+    "shortDescription": "API REST en PHP procédural modernisée et sécurisée.",
+    "description": "Réalisation d'une API REST en PHP 'from scratch' avec routing natif, validation, sécurisation des entrées utilisateur, gestion des erreurs structurée et organisation en modules. Travail pédagogique centré sur les fondamentaux du HTTP.",
+    "image": "/images/legacyrest.jpg",
+    "technologies": ["PHP", "MySQL", "REST"]
+  },
+  {
+    "id": "kids-investigation-game",
+    "title": "En quête de vérité — Jeu d’enquête",
+    "type": "Application interactive",
+    "shortDescription": "Jeu narratif interactif autour d’une enquête simplifiée pour enfants.",
+    "description": "Développement d’un système d’enquête interactif basé sur des profils IA. Conception des personnages (victime, suspects), logique d’interrogatoire, gestion des contradictions et guidage du joueur. Projet axé UX enfant et cohérence narrative.",
+    "image": "/images/kids-investigation.jpg",
+    "technologies": ["Vue.js", "Prompt Engineering", "JavaScript"]
+  },
+  {
+    "id": "word-game-motus",
+    "title": "WordGame Engine",
+    "type": "Mini-jeu",
+    "shortDescription": "Jeu de lettres inspiré de Motus avec tour par tour et statut des lettres.",
+    "description": "Conception d'un moteur de jeu simple avec gestion des mots, validation, règles (présent, absent, correct), historique des tentatives, et architecture SQL légère. Mise en place d’une logique de manche et timer facultatif.",
+    "image": "/images/word-game.jpg",
+    "technologies": ["PHP", "MySQL", "JavaScript"]
+  },
+  {
+    "id": "portfolio-e1",
+    "title": "Portfolio V1 — No Framework",
+    "type": "Site vitrine",
+    "shortDescription": "Première version du portfolio réalisée en HTML/CSS/JS natif.",
+    "description": "Réalisation d’une Single Page Application sans framework : smooth scroll, système de cartes projet, animations custom, menu burger responsive, gestion dark/light mode via localStorage.",
+    "image": "/images/portfolio-e1.jpg",
+    "technologies": ["HTML", "CSS", "JavaScript"]
+  },
+  {
+    "id": "portfolio-e2",
+    "title": "Portfolio V2 — Vue.js + Tailwind",
+    "type": "Application web",
+    "shortDescription": "Version professionnelle du portfolio utilisant Vue.js et Tailwind.",
+    "description": "Refonte complète du portfolio en composant Vue réutilisables : Header, Hero, ProjectList, ProjectCard, router pour pages dédiées, validation du formulaire de contact, ajout dynamique de projets, theming moderne avec Tailwind.",
+    "image": "/images/portfolio-e2.jpg",
+    "technologies": ["Vue.js", "TypeScript", "Tailwind CSS"]
+  },
+  {
+    "id": "upcoming-travel-platform",
+    "title": "NovaTravel — Plateforme de voyage",
+    "type": "À venir",
+    "shortDescription": "Développement d'un site moderne dédié à la recherche et gestion de voyages.",
+    "description": "Projet en cours : plateforme permettant de découvrir des destinations, filtrer par budget, date, activités, et consulter des fiches détaillées. Objectif : créer un site fluide, moderne et esthétiquement cohérent utilisant Vue.js et une API externe.",
+    "image": "/images/upcoming-travel.jpg",
+    "technologies": ["Vue.js", "Tailwind CSS", "API REST"],
+    "upcoming": true
+  }
+]
