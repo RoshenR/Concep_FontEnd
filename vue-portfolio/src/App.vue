@@ -2,7 +2,6 @@
   <div
       class="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 relative overflow-hidden"
   >
-    <!-- Fond gradient + grid -->
     <div
         class="pointer-events-none absolute inset-0 opacity-40"
         aria-hidden="true"
@@ -14,10 +13,8 @@
     </div>
 
     <div class="relative flex flex-col min-h-screen">
-      <!-- Header -->
       <AppHeader />
 
-      <!-- Contenu avec transition de pages -->
       <main class="flex-1">
         <RouterView v-slot="{ Component, route }">
           <Transition name="page" mode="out-in">
@@ -26,10 +23,8 @@
         </RouterView>
       </main>
 
-      <!-- Bouton scroll to top global -->
       <ScrollToTopButton />
 
-      <!-- Footer -->
       <AppFooter />
     </div>
   </div>

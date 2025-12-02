@@ -15,13 +15,11 @@ const router = createRouter({
             props: true,
         },
     ],
-    scrollBehavior(to, from, savedPosition) {
-        // Si on revient en arrière / avant → position sauvegardée
+    scrollBehavior(to, _from, savedPosition) {
         if (savedPosition) {
             return savedPosition
         }
 
-        // Si on a un hash (ex: #contact), on scroll dessus
         if (to.hash) {
             return {
                 el: to.hash,
