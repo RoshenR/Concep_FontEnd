@@ -47,6 +47,19 @@
         />
       </div>
 
+      <!-- Mot de passe admin -->
+      <div class="space-y-2">
+        <label class="block text-sm">Mot de passe administrateur</label>
+        <input
+            v-model="password"
+            type="password"
+            class="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2
+                 bg-white border-slate-300 text-slate-900 focus:ring-cyan-500
+                 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100"
+            placeholder="Mot de passe requis pour ajouter"
+        />
+      </div>
+
       <!-- Description courte -->
       <div class="space-y-2 md:col-span-2">
         <label class="block text-sm">Description courte</label>
@@ -100,6 +113,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
+import { ADMIN_PASSWORD } from '../../constants/auth'
 import type { Project } from '../../types/Project'
 
 const emit = defineEmits<{
@@ -116,10 +130,19 @@ const form = reactive<Omit<Project, 'id'>>({
 })
 
 const technologiesText = ref('')
+const password = ref('')
 const error = ref<string | null>(null)
 
 function handleSubmit() {
   error.value = null
+
+  if (!password.value.trim()) {
+    return (error.value = 'Le mot de passe administrateur est requis.')
+  }
+
+  if (password.value !== ADMIN_PASSWORD) {
+    return (error.value = 'Mot de passe administrateur incorrect.')
+  }
 
   if (!form.title.trim()) return (error.value = 'Le titre est obligatoire.')
   if (!form.type.trim()) return (error.value = 'Le type est obligatoire.')
@@ -151,5 +174,6 @@ function handleSubmit() {
   form.image = ''
   form.technologies = []
   technologiesText.value = ''
+  password.value = ''
 }
 </script>

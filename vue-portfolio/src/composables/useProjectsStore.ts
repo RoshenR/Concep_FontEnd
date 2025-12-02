@@ -32,6 +32,16 @@ function saveExtraProjectsToStorage(extraProjects: Project[]) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(extraProjects))
 }
 
+function createId() {
+    if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+        return crypto.randomUUID()
+    }
+
+    // Fallback simple unique id when crypto.randomUUID is unavailable
+    return `proj-${Date.now().toString(16)}-${Math.random().toString(16).slice(2, 10)}`
+}
+
+
 async function loadProjects() {
     if (loaded.value || loading.value) return
 
@@ -65,7 +75,7 @@ async function loadProjects() {
 }
 
 function addProject(partial: Omit<Project, 'id'>) {
-    const id = crypto.randomUUID()
+    const id = createId()
     const newProject: Project = { ...partial, id }
 
     projects.value.push(newProject)

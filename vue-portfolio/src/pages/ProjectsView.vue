@@ -47,6 +47,7 @@ import ProjectCard from '../components/projects/ProjectCard.vue'
 import ProjectFilters from '../components/projects/ProjectFilters.vue'
 import AddProjectForm from '../components/projects/AddProjectForm.vue'
 import ProjectSkeleton from '../components/projects/ProjectSkeleton.vue'
+import { ADMIN_PASSWORD } from '../constants/auth'
 import { useProjectsStore } from '../composables/useProjectsStore'
 import type { Project } from '../types/Project'
 
@@ -73,7 +74,7 @@ function handleProjectAdded(partial: Omit<Project, 'id'>) {
 function handleDelete(id: string) {
   const password = window.prompt('Mot de passe admin requis pour supprimer ce projet :')
 
-  if (password !== 'admin') {
+  if (password !== ADMIN_PASSWORD) {
     if (password !== null) {
       window.alert('Mot de passe incorrect.')
     }
