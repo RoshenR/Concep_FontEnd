@@ -1,7 +1,7 @@
 <template>
   <section class="max-w-5xl mx-auto px-4 py-10 md:py-14 space-y-16">
     <!-- HERO -->
-    <header class="grid md:grid-cols-[3fr,2fr] gap-10 items-center animate-fade-in-up">
+    <header class="grid md:grid-cols-[3fr,2fr] gap-10 items-center animate-in">
       <div class="space-y-4">
         <p
             class="inline-flex items-center gap-2 text-[11px] font-medium text-cyan-700 bg-cyan-100/70 border border-cyan-300/70 rounded-full px-3 py-1 dark:text-cyan-300 dark:bg-cyan-500/10 dark:border-cyan-500/30"
@@ -74,7 +74,7 @@
     </header>
 
     <!-- SECTION PROJETS -->
-    <section class="space-y-3">
+    <section class="space-y-3 animate-in animate-delay-1">
       <h2 class="text-2xl font-semibold">Projets</h2>
       <p class="text-slate-600 text-sm max-w-2xl dark:text-slate-400">
         Sélection de projets réalisés : APIs, applications web, jeux interactifs…
@@ -88,9 +88,9 @@
     </section>
 
     <!-- SECTION COMPÉTENCES / SERVICES -->
-    <section class="grid md:grid-cols-2 gap-6">
+    <section class="grid md:grid-cols-2 gap-6 animate-in animate-delay-2">
       <div
-          class="rounded-2xl border border-slate-200 bg-white/90 p-5 shadow-soft/20 space-y-3 dark:border-slate-800 dark:bg-slate-900/70"
+          class="rounded-2xl border border-slate-200 bg-white/90 p-5 md:p-6 shadow-soft/20 space-y-4 dark:border-slate-800 dark:bg-slate-900/70 animate-in animate-delay-3"
       >
         <h2 class="text-lg font-semibold mb-1">Compétences</h2>
         <p class="text-slate-500 text-xs mb-2 dark:text-slate-400">
@@ -126,6 +126,50 @@
           <li>• Amélioration de projets existants (refactor, performance, UX)</li>
         </ul>
       </div>
+    </section>
+
+    <!-- SECTION À PROPOS -->
+    <section
+        class="rounded-2xl border border-slate-200 bg-white/90 p-5 md:p-6 shadow-soft/20 space-y-4 dark:border-slate-800 dark:bg-slate-900/70"
+    >
+      <h2 class="text-lg font-semibold flex items-center gap-2">
+        À propos
+        <span class="text-xs px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-700 border border-cyan-300/70 dark:bg-cyan-500/10 dark:text-cyan-200 dark:border-cyan-500/40">
+          NovaDev Studio
+        </span>
+      </h2>
+      <p class="text-sm text-slate-600 dark:text-slate-300">
+        Je suis actuellement en formation dans le développement web (niveau bac+3) et en alternance
+        dans une entreprise où je travaille sur des projets concrets : intégration front, petites
+        applications internes, automatisations et amélioration d’outils existants.
+      </p>
+
+      <p class="text-sm text-slate-600 dark:text-slate-300">
+        À côté de mon alternance, j’aime développer mes propres projets et expérimenter de nouvelles
+        technos dès que j’en ai l’occasion. C’est ce que je présente dans ce portfolio : une sélection
+        de travaux personnels, de projets d’école et de prototypes plus avancés.
+      </p>
+
+      <p class="text-sm text-slate-600 dark:text-slate-300">
+        Même si mon emploi du temps est déjà bien rempli avec l’alternance, je reste ouvert à des
+        <span class="font-medium">petites missions freelance ponctuelles</span> principalement de
+        l’intégration web, la création de pages ou mini-sites, ou l’amélioration d’un projet existant
+        (UX, performance, front moderne). L’idée : aider sur des missions courtes, simples, mais
+        bien réalisées.
+      </p>
+
+      <p class="text-sm text-slate-600 dark:text-slate-300">
+        J’essaie de garder une approche claire dans ma manière de travailler : communication honnête,
+        deadlines réalistes, et code propre autant que possible. J’aime comprendre le besoin,
+        proposer des solutions, puis construire quelque chose qui fonctionne vraiment pour la
+        personne en face.
+      </p>
+      <RouterLink
+          :to="{ path: '/', hash: '#contact' }"
+          class="inline-flex items-center gap-1 text-xs text-cyan-700 hover:text-cyan-600 dark:text-cyan-300 dark:hover:text-cyan-200"
+      >
+        Discuter d’un projet →
+      </RouterLink>
     </section>
 
     <!-- CONTACT -->

@@ -15,13 +15,17 @@
         @update:type="selectedType = $event"
     />
 
-    <div v-if="loading" class="text-slate-500 text-sm dark:text-slate-400">
-      Chargement des projets...
+    <!-- 🔄 ÉTAT CHARGEMENT : SKELETONS -->
+    <div v-if="loading" class="grid md:grid-cols-2 gap-6">
+      <ProjectSkeleton v-for="n in 4" :key="n" />
     </div>
+
+    <!-- ❌ ÉTAT ERREUR -->
     <div v-else-if="error" class="text-red-500 text-sm">
       {{ error }}
     </div>
 
+    <!-- ✅ ÉTAT NORMAL : VRAIS PROJETS -->
     <div v-else class="grid md:grid-cols-2 gap-6">
       <ProjectCard
           v-for="project in filteredProjects"
@@ -32,6 +36,7 @@
       />
     </div>
 
+    <!-- Formulaire d'ajout de projet -->
     <AddProjectForm @project-added="handleProjectAdded" />
   </section>
 </template>
@@ -41,6 +46,7 @@ import { onMounted } from 'vue'
 import ProjectCard from '../components/projects/ProjectCard.vue'
 import ProjectFilters from '../components/projects/ProjectFilters.vue'
 import AddProjectForm from '../components/projects/AddProjectForm.vue'
+import ProjectSkeleton from '../components/projects/ProjectSkeleton.vue'
 import { useProjectsStore } from '../composables/useProjectsStore'
 import type { Project } from '../types/Project'
 

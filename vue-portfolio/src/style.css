@@ -26,3 +26,72 @@ html.theme-switching {
     opacity: 0.92;
     transition: opacity 0.25s ease;
 }
+
+/* TRANSITIONS DE PAGES (fade + léger slide) */
+.page-enter-active,
+.page-leave-active {
+    transition:
+            opacity 0.25s ease,
+            transform 0.25s ease;
+}
+
+.page-enter-from,
+.page-leave-to {
+    opacity: 0;
+    transform: translateY(8px);
+}
+
+.page-enter-to,
+.page-leave-from {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes fade-in-up-soft {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Classe de base : fade + slide up */
+.animate-in {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fade-in-up-soft 0.45s ease-out forwards;
+}
+
+/* Petits décalages pour enchaîner les blocs */
+.animate-delay-1 {
+    animation-delay: 0.08s;
+}
+.animate-delay-2 {
+    animation-delay: 0.16s;
+}
+.animate-delay-3 {
+    animation-delay: 0.24s;
+}
+.animate-delay-4 {
+    animation-delay: 0.32s;
+}
+
+
+/* ÉTAT INITIAL (avant apparition) */
+.before-reveal {
+    opacity: 0;
+    transform: translateY(12px);
+}
+
+/* ÉTAT FINAL : fade + slide-up smooth */
+.animate-reveal {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+            opacity 0.6s ease,
+            transform 0.6s cubic-bezier(0.24, 0.65, 0.29, 0.94);
+}
+
