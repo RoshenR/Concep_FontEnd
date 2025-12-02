@@ -546,7 +546,7 @@ function hexToRgb(hex) {
 /**
  * Convert {r,g,b} -> HEX
  */
-function rgbToHex({ r, g, b }) {
+function rgbToHex({r, g, b}) {
     const toHex = (v) => {
         const h = v.toString(16);
         return h.length === 1 ? '0' + h : h;
@@ -560,7 +560,7 @@ function rgbToHex({ r, g, b }) {
  * Ex: 0.2 = +20%, -0.2 = -20%
  */
 function adjustColorLuminance(hex, percent) {
-    const { r, g, b } = hexToRgb(hex);
+    const {r, g, b} = hexToRgb(hex);
     const adjust = (c) => {
         if (percent > 0) {
             return Math.round(c + (255 - c) * percent);
@@ -590,7 +590,7 @@ ${content}
  * ----------------------------------------------------------*/
 
 function generateColors(theme) {
-    const { colors } = theme;
+    const {colors} = theme;
 
     let css = `/* === Colors & CSS variables === */\n:root {\n`;
     for (const [name, value] of Object.entries(colors)) {
@@ -620,7 +620,7 @@ function generateColors(theme) {
 }
 
 function generateTypography(theme) {
-    const { typography, spacing } = theme;
+    const {typography, spacing} = theme;
     const lineHeightRatio = parseFloat(spacing.ratioLineHeight || '1.25');
 
     return `/* === Typography === */
@@ -659,7 +659,7 @@ p {
 }
 
 function generateLayout(theme) {
-    const { layout } = theme;
+    const {layout} = theme;
     const cols = layout.cols;
     const breakpoints = layout.breakpoints;
 
@@ -868,7 +868,7 @@ function getUtilityFlexRuleForClass(cls) {
 }
 
 function generateUtilityColor(theme) {
-    const { colors } = theme;
+    const {colors} = theme;
 
     let css = `/* === Utility: Colors (text & background) === */\n`;
 
@@ -917,7 +917,7 @@ function generateUtilityImage() {
  * ----------------------------------------------------------*/
 
 function generateComponentButton(theme) {
-    const { transition } = theme;
+    const {transition} = theme;
     return `/* === Component: Button === */
 :root {
   --btn-radius: 9999px;
@@ -1103,7 +1103,7 @@ function countClasses(css) {
 
 async function runBuild() {
     try {
-        await fs.mkdir(OUTPUT_DIR, { recursive: true });
+        await fs.mkdir(OUTPUT_DIR, {recursive: true});
 
         const rawCss = generateCSS(config);
 
@@ -1117,7 +1117,7 @@ async function runBuild() {
         // CSS minifié (autoprefixer + cssnano)
         const minified = await postcss([
             autoprefixer,
-            cssnano({ preset: 'default' })
+            cssnano({preset: 'default'})
         ]).process(rawCss, {
             from: undefined
         });
